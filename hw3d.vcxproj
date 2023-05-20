@@ -141,12 +141,14 @@
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowsMessageMap.cpp" />
     <ClCompile Include="WinMain.cpp" />
+    <ClCompile Include="ChiliException.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="chiliWin.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsMessageMap.h" />
+    <ClInclude Include="ChiliException.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

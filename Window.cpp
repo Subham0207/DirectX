@@ -5,7 +5,7 @@
 // Window Class Stuff
 Window::WindowClass Window::WindowClass::wndClass;
 
-Window::WindowClass::WindowClass() noexcept
+Window::WindowClass::WindowClass()
 	:
 	hInst(GetModuleHandle(nullptr))
 {
@@ -42,7 +42,7 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 
 
 // Window Stuff
-Window::Window(int width, int height, const char* name) noexcept
+Window::Window(int width, int height, const char* name)
 {
 	// calculate window size based on desired client region size
 	RECT wr;
@@ -51,6 +51,14 @@ Window::Window(int width, int height, const char* name) noexcept
 	wr.top = 100;
 	wr.bottom = height + wr.top;
 	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
+
+	//Throwing Chili exception
+	throw CHWND_EXCEPT(ERROR_ARENA_TRASHED);
+
+	//Throwing std exception
+	//throw std::runtime_error("something went wrong");
+
+
 	// create window & get hWnd
 	hWnd = CreateWindowA(
 		WindowClass::GetName(), name,
