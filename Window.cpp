@@ -51,14 +51,6 @@ Window::Window(int width, int height, const char* name)
 	wr.top = 100;
 	wr.bottom = height + wr.top;
 	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
-
-	//Throwing Chili exception
-	throw CHWND_EXCEPT(ERROR_ARENA_TRASHED);
-
-	//Throwing std exception
-	//throw std::runtime_error("something went wrong");
-
-
 	// create window & get hWnd
 	hWnd = CreateWindowA(
 		WindowClass::GetName(), name,
