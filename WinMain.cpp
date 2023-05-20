@@ -10,23 +10,39 @@ int CALLBACK WinMain(
 	int nCmdShow)
 {
 
-	Window wnd(512, 768, "Donkey Box");
+	try{
+		Window wnd(512, 768, "Donkey Box");
 
-	MSG msg;
-	BOOL gResult;
-	while (( gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
+		MSG msg;
+		BOOL gResult;
+		while ((gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
+		{
+			//basically if we don't use WM_CHAR we can remove the Translate message method
+			TranslateMessage(&msg); // Translate message could generate other messages; If event is a KEYDOWN then this generaates a WM_CHAR and posts it to the queue;
+			DispatchMessageW(&msg);
+		}
+
+
+
+		if (gResult == -1) {
+			return -1;
+		}
+		else {
+			return msg.wParam; // msdn docs for WM_QUIT -- wparam and lparam value
+		}
+	}
+	catch (const ChiliException& e)
 	{
-		//basically if we don't use WM_CHAR we can remove the Translate message method
-		TranslateMessage(&msg); // Translate message could generate other messages; If event is a KEYDOWN then this generaates a WM_CHAR and posts it to the queue;
-		DispatchMessageW(&msg);
+		MessageBoxA(nullptr, e.what(), e.GetType(), MB_OK | MB_ICONEXCLAMATION);
 	}
-
-
-
-	if (gResult == -1) {
-		return -1;
+	catch (const std::exception& e)
+	{
+		MessageBoxA(nullptr, e.what(), "Standard Exception", MB_OK | MB_ICONEXCLAMATION);
 	}
-	else {
-		return msg.wParam; // msdn docs for WM_QUIT -- wparam and lparam value
+	catch (...)
+	{
+		MessageBoxA(nullptr, "No details available", "Unknown Exception", MB_OK | MB_ICONEXCLAMATION);
 	}
+	return -1;
+	
 }
