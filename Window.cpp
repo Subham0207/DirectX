@@ -124,11 +124,14 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	case WM_KEYDOWN:
 	// SYSKeys are ALT and F10 among others
 	case WM_SYSKEYDOWN:
-		if (!(lParam && 0x40000000) || kbd.AutorepeatIsEnabled())
+	{
+		auto param = !(lParam & 0x40000000);
+		if (param || kbd.AutorepeatIsEnabled())
 		{
 			kbd.OnKeyPressed(static_cast<unsigned char>(wParam));
 		}
 		break;
+	}
 	case WM_KEYUP:
 	case WM_SYSKEYUP:
 		kbd.OnKeyReleased(static_cast<unsigned char>(wParam));
