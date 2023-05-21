@@ -50,6 +50,9 @@ HINSTANCE Window::WindowClass::GetInstance() noexcept
 
 // Window Stuff
 Window::Window(int width, int height, const char* name)
+	:
+	width(width),
+	height(height)
 {
 	// calculate window size based on desired client region size
 	RECT wr;
@@ -80,6 +83,14 @@ Window::Window(int width, int height, const char* name)
 Window::~Window()
 {
 	DestroyWindow(hWnd);
+}
+
+void Window::SetTitle(const std::string& title)
+{
+	if (SetWindowTextA(hWnd, title.c_str()) == 0)
+	{
+		throw CHWND_LAST_EXCEPT();
+	}
 }
 
 LRESULT WINAPI Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
@@ -143,8 +154,9 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 		/************* MOUSE MESSAGES ****************/
 	case WM_MOUSEMOVE:
 	{
-		POINTS pt = MAKEPOINTS(lParam);
+		const POINTS pt = MAKEPOINTS(lParam);
 		mouse.OnMouseMove(pt.x, pt.y);
+		break;
 	}
 	case WM_LBUTTONDOWN:
 	{
