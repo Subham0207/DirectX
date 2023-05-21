@@ -20,6 +20,16 @@ int CALLBACK WinMain(
 		//basically if we don't use WM_CHAR we can remove the Translate message method
 		TranslateMessage(&msg); // Translate message could generate other messages; If event is a KEYDOWN then this generaates a WM_CHAR and posts it to the queue;
 		DispatchMessageW(&msg);
+		while (!wnd.mouse.IsEmpty())
+		{
+			const auto e = wnd.mouse.Read();
+			if (e.GetType() == Mouse::Event::Type::Move)
+			{
+				std::ostringstream oss;
+				oss << "Mouse Position: (" << e.GetPosX() << "," << e.GetPosY() << ")";
+				wnd.SetTitle(oss.str());
+			}
+		}
 	}
 
 
