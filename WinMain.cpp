@@ -12,6 +12,7 @@ int CALLBACK WinMain(
 
 	Window wnd(512, 768, "Donkey Box");
 
+	wnd.kbd.EnableAutorepeat();
 	MSG msg;
 	BOOL gResult;
 	while (( gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
