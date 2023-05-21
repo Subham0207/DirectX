@@ -138,6 +138,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="ChiliTimer.cpp" />
     <ClCompile Include="Helper.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mouse.cpp" />
@@ -148,6 +149,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="ChiliTImer.h" />
     <ClInclude Include="chiliWin.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="Keyboard.h" />
