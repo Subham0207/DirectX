@@ -15,6 +15,7 @@ int CALLBACK WinMain(
 	wnd.kbd.EnableAutorepeat();
 	MSG msg;
 	BOOL gResult;
+	static int i = 0;
 	while (( gResult = GetMessage(&msg, nullptr, 0, 0)) > 0)
 	{
 		//basically if we don't use WM_CHAR we can remove the Translate message method
@@ -35,6 +36,22 @@ int CALLBACK WinMain(
 				wnd.SetTitle(oss.str());
 			}
 			break;
+			case Mouse::Event::Type::WheelUp:
+				i++;
+				{
+					std::ostringstream oss;
+					oss << "Up: " << i;
+					wnd.SetTitle(oss.str());
+				}
+				break;
+			case Mouse::Event::Type::WheelDown:
+				i--;
+				{
+					std::ostringstream oss;
+					oss << "Down: " << i;
+					wnd.SetTitle(oss.str());
+				}
+				break;
 			}
 		}
 	}
